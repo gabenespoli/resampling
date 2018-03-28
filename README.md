@@ -14,13 +14,13 @@ Once the sampling has been completed, the CIs can be used to obtain the point of
 
 ## Tutorial
 
-1. First, source this package:
+First, source this package:
 
 ```R
 source("ResamplingPackage.R")
 ```
 
-2. To sample from a vector, use the `RSSample` function:
+To sample from a vector, use the `RSSample` function:
 
 ```R
 sampled <- RSSample(rating)
@@ -32,25 +32,25 @@ The output is a list of two data frames:
 
 `ci` (`sampled$ci` in the above example) has three columns for the iteration, the lower limit of the CI, and the upper limit of the CI.
 
-3. If you would like to do the sampling separately for different groups of values, you can pass the groupings as a factor. In our case, the data were ratings of different stimuli, and we wanted to do the sampling separately for each stimulus.
+If you would like to do the sampling separately for different groups of values, you can pass the groupings as a factor. In our case, the data were ratings of different stimuli, and we wanted to do the sampling separately for each stimulus.
 
 ```R
 sampled <- RSSample(rating, stimulus)
 ```
 
-4. The package also provides a loop wrapper for `RSSample`, creatively called `RSSampleLoop`. In our case, we had many different ratings for each stimulus, and wanted to sample separately for each rating-type and stimulus. Simply pass a factor as the second argument to `RSSampleLoop` to have the tool loop through the unique values in that factor. You can also provide a directory where the sampled data for each will be saved as an .Rda file.
+The package also provides a loop wrapper for `RSSample`, creatively called `RSSampleLoop`. In our case, we had many different ratings for each stimulus, and wanted to sample separately for each rating-type and stimulus. Simply pass a factor as the second argument to `RSSampleLoop` to have the tool loop through the unique values in that factor. You can also provide a directory where the sampled data for each will be saved as an .Rda file.
 
 ```R
 sampled <- RSSampleLoop(rating, trait, stimulus)
 ```
 
-5. To find out how many iterations are needed before the average is stable, the `RSGetPointOfStability` function checks when the range of the CI falls below a specified threshold. Note that the units of the CI are the same as your data. In our case, these were ratings on a 7-point Likert scale (i.e., integers from 1 to 7).
+To find out how many iterations are needed before the average is stable, the `RSGetPointOfStability` function checks when the range of the CI falls below a specified threshold. Note that the units of the CI are the same as your data. In our case, these were ratings on a 7-point Likert scale (i.e., integers from 1 to 7).
 
 ```R
 pos <- RSGetPointOfStability(sampled$ci, 1)
 ```
 
-6. Use the `RSFigure` function to create a plot with iterations on the x-axis and the average value on the y-axis. Each stimulus as well as the CIs are plotted. YOu can specify a threshold (like in `RSGetPointOfStability`) so that a vertical line will be plotted at the point of stability. Save the figure as a .png by specifying a filename.
+Use the `RSFigure` function to create a plot with iterations on the x-axis and the average value on the y-axis. Each stimulus as well as the CIs are plotted. YOu can specify a threshold (like in `RSGetPointOfStability`) so that a vertical line will be plotted at the point of stability. Save the figure as a .png by specifying a filename.
 
 ```R
 RSFigure(sampled$data, sampled$ci, threshold=1, figPNGname="myFigure.png")
