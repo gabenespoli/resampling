@@ -256,8 +256,7 @@ RSGetCI <- function(x, y=0.95, method=2) {
   #   x:      Vector of values to get CI.
   #   y:      Numberic input to function being called. Default 0.95.
   #   method: Which function to call. See those functions for detail about
-  #           their input. Use 1 for RSGetNormalRange, 2 for RSGetPercentile,
-  #           and 3 for RSGetReducedRange.
+  #           their input. Use 1 for RSGetNormalRange or 2 for RSGetPercentile.
   #
   # Returns:
   #   CI <- c(LL, UL), where LL is the lower limit and UL is the upper limit.
@@ -265,8 +264,6 @@ RSGetCI <- function(x, y=0.95, method=2) {
     CI <- RSGetNormalRange(x, confidence=y)
   } else if (method == 2) {
     CI <- RSGetPercentile(x, percentile=y)
-  } else if (method == 3) {
-    CI <- RSGetReducedRange(x, y=y)
   } else {
     stop("Invalid method for getting CI.")
   }
