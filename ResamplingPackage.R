@@ -427,20 +427,3 @@ RSFigure <- function(sampled,
 
   return(p)
 }
-
-# function RSSimulation -------------------------------------------------------
-RSSimulation <- function(ssize=1000, smean=0, ssd=1) {
-  # stimulate some normally-distributed data
-  data <- rnorm(ssize, smean, ssd)
-
-  # TODO: restrict values to 1-7 likert
-
-  # Run through RS functions
-  temp <- RSSample(data)
-  sampled <- temp$data
-  ci <- temp$ci
-
-  title <- paste("mean=", smean, ", ", "sd=", ssd, sep="")
-  p <- RSFigure(sampled, ci, title=title, threshold=1)
-  p
-}
