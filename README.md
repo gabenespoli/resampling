@@ -12,6 +12,8 @@ Also at each iteration, a confidence interval (CI) is created around the repeate
 
 Once the sampling has been completed, the CIs can be used to obtain the point of stability of the average using the `RSGetPointOfStability` and a specified threshold. The results can also be plotted using `RSFigure`.
 
+See the comments within each function in `ResamplingTool.R` for a complete list of parameters and their default values.
+
 ## Tutorial
 
 First, source the tool:
