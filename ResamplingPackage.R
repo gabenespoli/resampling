@@ -168,7 +168,6 @@ RSSample <- function(Rating,
 
   # split Rating into a list of vectors by Stimulus so we can more
   #   do things separately for each stimulus
-  # TODO: test that this works with Stimulus=factor()
   if (length(Stimulus) != 0) {
     Rating.by.Stimulus <- split(Rating, Stimulus, drop=TRUE)
   } else {
