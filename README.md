@@ -58,6 +58,8 @@ Use the `RSFigure` function to create a plot with iterations on the x-axis and t
 RSFigure(sampled$data, sampled$ci, threshold=1, figPNGname="myFigure.png")
 ```
 
+![Example figure of resampled data.](example_figure.png)
+
 ## Acknowledgements
 
 This code was developed in collaboration with [Eric Hehman](http://erichehman.com), Sally Xie, and Eugene Ofosu.
