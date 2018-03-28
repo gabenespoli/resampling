@@ -14,10 +14,10 @@ Once the sampling has been completed, the CIs can be used to obtain the point of
 
 ## Tutorial
 
-First, source this package:
+First, source the tool:
 
 ```R
-source("ResamplingPackage.R")
+source("ResamplingTool.R")
 ```
 
 To sample from a vector, use the `RSSample` function:
@@ -38,7 +38,7 @@ If you would like to do the sampling separately for different groups of values, 
 sampled <- RSSample(rating, stimulus)
 ```
 
-The package also provides a loop wrapper for `RSSample`, creatively called `RSSampleLoop`. In our case, we had many different ratings for each stimulus, and wanted to sample separately for each rating-type and stimulus. Simply pass a factor as the second argument to `RSSampleLoop` to have the tool loop through the unique values in that factor. You can also provide a directory where the sampled data for each will be saved as an .Rda file.
+The tool also provides a loop wrapper for `RSSample`, creatively called `RSSampleLoop`. In our case, we had many different ratings for each stimulus, and wanted to sample separately for each rating-type and stimulus. Simply pass a factor as the second argument to `RSSampleLoop` to have the tool loop through the unique values in that factor. You can also provide a directory where the sampled data for each will be saved as an .Rda file.
 
 ```R
 sampled <- RSSampleLoop(rating, trait, stimulus)
