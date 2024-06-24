@@ -374,45 +374,44 @@ RSFigure <- function(sampled,
                      varying=list(3:ncol(sampled)))
   names(sampled) <- c("Stimulus", "Repetition", "n", "Rating", "id")
 
-  # colours
-  cols<-colorRampPalette(brewer.pal(9, "YlGnBu"))
-  cols<-colorRampPalette(brewer.pal(11, "Spectral"))
+  # colour options
+  cols<-colorRampPalette(brewer.pal(11, "RdYlBu"))
+  #cols<-colorRampPalette(brewer.pal(11, "Spectral"))
+  
   myPals <-cols(length(unique(sampled$Stimulus)))
-  ci.colour <- "#000000"
+  ci.colour <- "#C75DAB"
   ci.linetype <- "solid"
   ci.size <- 1
 
   # plot each iteration and repetition
   p <- ggplot(sampled, aes(x=n, col=Stimulus)) +
-    geom_line(aes(y=Rating), size=1, alpha=.2) +
+    geom_line(aes(y=Rating), linewidth=1, alpha=.2) +
     theme_minimal() +
     theme(legend.position="none") +
     theme(panel.grid.major = element_line(colour="#e8e8e8"),
           panel.grid.minor = element_line(colour="#e8e8e8")) +
-    scale_color_manual(values=myPals) +
+    scale_color_manual(values=myPals)
+    #scale_fill_viridis(option="mako",discrete=FALSE)+
     theme(legend.position="none") +
     xlab("n") +
     ylab("Rating") +
     ggtitle(title) +
     theme(axis.text=element_text(size=24),
           axis.title=element_text(size=24, face="bold"),
-          plot.title=element_text(hjust=0.5, size=20)) +
-    coord_cartesian(xlim=c(1, 100), ylim=c(-3.00, 3.00)) +
-    scale_y_continuous(breaks=c(-3, -1, 0, 1, 3)) +
-    scale_x_continuous(breaks=c(1, 20, 40, 60, 80, 100))
+          plot.title=element_text(hjust=0.5, size=20))
 
   # add lines for CI
   p <- p +
     geom_line(data=ci,
-              aes(x=as.numeric(ci$n), y=ci$UL),
+              aes(x=as.numeric(n), y=UL),
               colour=ci.colour,
               linetype=ci.linetype,
-              size=ci.size) +
+              linewidth=ci.size) +
     geom_line(data=ci,
-              aes(x=as.numeric(ci$n), y=ci$LL),
+              aes(x=as.numeric(n), y=LL),
               colour=ci.colour,
               linetype=ci.linetype,
-              size=ci.size)
+              linewidth=ci.size)
 
   # add point of stability
   if (!is.na(threshold)) {
@@ -448,3 +447,4 @@ RSSimulation <- function(ssize=1000, smean=0, ssd=1) {
   p <- RSFigure(sampled, ci, title=title, threshold=1)
   p
 }
+
