@@ -168,6 +168,7 @@ RSSample <- function(Rating,
 
   # split Rating into a list of vectors by Stimulus so we can more
   #   do things separately for each stimulus
+  # TODO: test that this works with Stimulus=factor()
   if (length(Stimulus) != 0) {
     Rating.by.Stimulus <- split(Rating, Stimulus, drop=TRUE)
   } else {
@@ -255,7 +256,8 @@ RSGetCI <- function(x, y=0.95, method=2) {
   #   x:      Vector of values to get CI.
   #   y:      Numberic input to function being called. Default 0.95.
   #   method: Which function to call. See those functions for detail about
-  #           their input. Use 1 for RSGetNormalRange or 2 for RSGetPercentile.
+  #           their input. Use 1 for RSGetNormalRange, 2 for RSGetPercentile,
+  #           and 3 for RSGetReducedRange.
   #
   # Returns:
   #   CI <- c(LL, UL), where LL is the lower limit and UL is the upper limit.
@@ -263,6 +265,8 @@ RSGetCI <- function(x, y=0.95, method=2) {
     CI <- RSGetNormalRange(x, confidence=y)
   } else if (method == 2) {
     CI <- RSGetPercentile(x, percentile=y)
+  } else if (method == 3) {
+    CI <- RSGetReducedRange(x, y=y)
   } else {
     stop("Invalid method for getting CI.")
   }
@@ -426,4 +430,21 @@ RSFigure <- function(sampled,
   }
 
   return(p)
+}
+
+# function RSSimulation -------------------------------------------------------
+RSSimulation <- function(ssize=1000, smean=0, ssd=1) {
+  # stimulate some normally-distributed data
+  data <- rnorm(ssize, smean, ssd)
+
+  # TODO: restrict values to 1-7 likert
+
+  # Run through RS functions
+  temp <- RSSample(data)
+  sampled <- temp$data
+  ci <- temp$ci
+
+  title <- paste("mean=", smean, ", ", "sd=", ssd, sep="")
+  p <- RSFigure(sampled, ci, title=title, threshold=1)
+  p
 }
