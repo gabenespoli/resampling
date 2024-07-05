@@ -164,7 +164,8 @@ RSSample <- function(Rating,
                      repetitions = 500,
                      replacement = TRUE,
                      confidence = 0.95,
-                     ci.method = 2) {
+                     ci.method = 2,
+                     center.data = TRUE) {
     # Sample data
     # Sample data. For each subset defined by unique combinations of the values
     #   of Stimulus, randomly sample an increasing number of values
@@ -182,6 +183,8 @@ RSSample <- function(Rating,
     #   replacement:  Whether to sample with replacement. Default TRUE.
     #   confidence:   Confidence of confidence interval. Default 0.95.
     #   ci.method:    1 = normal distribution, 2 = percentile
+    #   center.data:  Center the data by subtracting the mean from all values.
+    #                 Default TRUE.
     #
     # Returns:
     #   A named list (sampled) with the following variables:
@@ -206,7 +209,9 @@ RSSample <- function(Rating,
     }
     
     # center the ratings separately for each stimulus
-    Rating.by.Stimulus <- lapply(Rating.by.Stimulus, RSMeanCenter)
+    if (center.data == TRUE) {
+        Rating.by.Stimulus <- lapply(Rating.by.Stimulus, RSMeanCenter)
+    }
     
     # loop iterations
     ci <- data.frame() # create container for ci data
