@@ -1,0 +1,33 @@
+# function ResamplingRecodeTraits ---------------------------------------------
+# recode levels of traits to be full names
+ResamplingRecodeTraits <- function(traits){
+  traits <- recode(traits,
+                   att = "attractive",
+                   dom = "dominant",
+                   fri = "friendly",
+                   agg = "aggressive",
+                   Ang = "angry",
+                   ass = "assertive",
+                   com = "competent",
+                   lik = "likeable",
+                   car = "caring",
+                   cre = "creative",
+                   fem = "feminine",
+                   gen = "gendertypical",
+                   Hap = "happy",
+                   hea = "healthy",
+                   int = "intelligent",
+                   mea = "mean",
+                   rac = "racetypical",
+                   Rac = "racetypical",
+                   sma = "smart",
+                   Soc = "socialpower",
+                   phy = "strong",
+                   Phy = "strong",
+                   str = "strong",
+                   tru = "trustworthy",
+                   war = "warm",
+                   Wis = "wise",
+                   you = "youthful",
+                   yth = "youthful")
+}
